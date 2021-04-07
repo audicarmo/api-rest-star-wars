@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: star-wars
+  sleuth:
+    sampler:
+      probability: 0.1
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_DATABASE:STAR_WARS}
+      username: ${MONGODB_USERNAME:STAR_WARS}
+      password: ${MONGODB_PASSWORD:STAR_WARS}
+  main:
+    allow-bean-definition-overriding: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: beans, env
