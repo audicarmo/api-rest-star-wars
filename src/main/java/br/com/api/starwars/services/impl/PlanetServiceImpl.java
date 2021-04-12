@@ -24,7 +24,7 @@ public class PlanetServiceImpl implements PlanetService {
         return repository.save(planet);
     }
 
-    //TODO Melhorar implementação
+    //TODO Improve implementation
     @Override
     @Transactional
     public Planet update(final String name, final String clima, final String terreno) {
@@ -36,7 +36,7 @@ public class PlanetServiceImpl implements PlanetService {
 
     }
 
-    //TODO Refatorar esse método
+    //TODO Refactor this method
     private Planet createPlanet(String name, String clima) {
 
         return (br.com.api.starwars.entities.Planet) Planet;
