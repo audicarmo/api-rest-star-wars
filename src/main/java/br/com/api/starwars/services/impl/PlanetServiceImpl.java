@@ -5,40 +5,42 @@ import br.com.api.starwars.repositories.PlanetRepository;
 import br.com.api.starwars.services.PlanetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlanetServiceImpl implements PlanetService {
 
-    private final PlanetRepository repository;
-    private Object Planet;
+    @Autowired
+    private final PlanetRepository planetRepository;
 
-    @Override
     @Transactional
-    public Planet create(final String name, final String clima, final String terreno) {
+    public Planet createPlanet(Planet planet, HttpServletResponse response) {
 
-        Planet planet = createPlanet(name, clima);
-        return repository.save(planet);
+        Planet planetSave = createPlanet(planet, response);
+            return planetRepository.save(planetSave);
     }
 
-    //TODO Improve implementation
-    @Override
-    @Transactional
-    public Planet update(final String name, final String clima, final String terreno) {
-        return null;
+    public Planet updatePlanet (Long codigo, Planet planet) {
+
+        Planet planetSave = getByCode(codigo);
+        BeanUtils.copyProperties(planet, planetSave, "codigo");
+
+            return planetRepository.save(planetSave);
     }
 
-    @Override
-    public void delete(final String id, final String name) {
-
-    }
-
-    //TODO Refactor this method
-    private Planet createPlanet(String name, String clima) {
-
-        return (br.com.api.starwars.entities.Planet) Planet;
+    public Planet getByCode(Long codigo) {
+        Planet planetSave = planetRepository.getOne(codigo);
+        if (planetSave == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
+        return planetSave;
     }
 }

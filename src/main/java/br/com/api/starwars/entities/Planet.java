@@ -1,5 +1,7 @@
 package br.com.api.starwars.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,22 +14,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static br.com.api.starwars.constants.ValidationConstraints.DELETED_REQUIRED;
+import static br.com.api.starwars.constants.ValidationConstraints.CLIMA_IS_REQUIRED;
 import static br.com.api.starwars.constants.ValidationConstraints.NAME_IS_REQUIRED;
 import static br.com.api.starwars.constants.ValidationConstraints.NAME_SIZE_MUST_BE_BETWEEN;
 import static br.com.api.starwars.constants.ValidationConstraints.PLANET_NAME_MAX_SIZE;
 import static br.com.api.starwars.constants.ValidationConstraints.PLANET_NAME_MIN_SIZE;
+import static br.com.api.starwars.constants.ValidationConstraints.TERRENO_IS_REQUIRED;
 
-@Slf4j
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "PLANET")
-@DynamicUpdate
+@Table(name = "PLANET")
 public class Planet {
 
     @Id
@@ -40,9 +42,11 @@ public class Planet {
     @Column(name = "NAME")
     private String name;
 
-    @NotNull(message = DELETED_REQUIRED)
-    @Column(name = "DELETED")
-    private Boolean deleted = false;
+    @NotBlank(message = CLIMA_IS_REQUIRED)
+    @Column(name = "CLIMA")
+    private String clima;
 
-    //TODO Implementar validator "validateIfDeleted"
+    @NotBlank(message = TERRENO_IS_REQUIRED)
+    @Column(name = "TERRENO")
+    private Long terreno;
 }

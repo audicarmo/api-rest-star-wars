@@ -2,11 +2,13 @@ package br.com.api.starwars.services;
 
 import br.com.api.starwars.entities.Planet;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface PlanetService {
 
-    Object create(String name, String clima, String terreno);
+    Planet createPlanet(Planet planet, HttpServletResponse response);
 
-    Planet update(String name, String clima, String terreno);
+    Planet getByCode(Long codigo);
 
-    void delete(String id, String name);
+    Planet updatePlanet(Long codigo, Planet planet);
 }
