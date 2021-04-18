@@ -23,6 +23,7 @@
 		<!-- Libs de classes utilitárias -->
 		<guava.version>28.2-jre</guava.version>
 		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+		<checkstyle.version>3.1.1</checkstyle.version>
 		<java.version>1.8</java.version>
 		<json.version>20201115</json.version>
 		<!-- Lib de geração de massa de dados fake -->
@@ -136,6 +137,24 @@
 						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.version}</version>
+				<configuration>
+					<configLocation>star_wars_checks.xml</configLocation>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

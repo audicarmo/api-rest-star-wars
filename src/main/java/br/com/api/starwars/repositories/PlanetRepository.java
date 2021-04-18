@@ -20,17 +20,17 @@ public class PlanetRepository implements JpaRepository<Planet, Long> {
     }
 
     @Override
-    public List<Planet> findAll(Sort sort) {
+    public List<Planet> findAll(final Sort sort) {
         return null;
     }
 
     @Override
-    public Page<Planet> findAll(Pageable pageable) {
+    public Page<Planet> findAll(final Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<Planet> findAllById(Iterable<Long> iterable) {
+    public List<Planet> findAllById(final Iterable<Long> iterable) {
         return null;
     }
 
@@ -40,17 +40,17 @@ public class PlanetRepository implements JpaRepository<Planet, Long> {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(final Long aLong) {
 
     }
 
     @Override
-    public void delete(Planet planet) {
+    public void delete(final Planet planet) {
 
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Planet> iterable) {
+    public void deleteAll(final Iterable<? extends Planet> iterable) {
 
     }
 
@@ -60,22 +60,22 @@ public class PlanetRepository implements JpaRepository<Planet, Long> {
     }
 
     @Override
-    public <S extends Planet> S save(S s) {
+    public <S extends Planet> S save(final S s) {
         return null;
     }
 
     @Override
-    public <S extends Planet> List<S> saveAll(Iterable<S> iterable) {
+    public <S extends Planet> List<S> saveAll(final Iterable<S> iterable) {
         return null;
     }
 
     @Override
-    public Optional<Planet> findById(Long aLong) {
+    public Optional<Planet> findById(final Long aLong) {
         return Optional.empty();
     }
 
     @Override
-    public boolean existsById(Long aLong) {
+    public boolean existsById(final Long aLong) {
         return false;
     }
 
@@ -85,12 +85,12 @@ public class PlanetRepository implements JpaRepository<Planet, Long> {
     }
 
     @Override
-    public <S extends Planet> S saveAndFlush(S s) {
+    public <S extends Planet> S saveAndFlush(final S s) {
         return null;
     }
 
     @Override
-    public void deleteInBatch(Iterable<Planet> iterable) {
+    public void deleteInBatch(final Iterable<Planet> iterable) {
 
     }
 
@@ -100,37 +100,37 @@ public class PlanetRepository implements JpaRepository<Planet, Long> {
     }
 
     @Override
-    public Planet getOne(Long aLong) {
+    public Planet getOne(final Long aLong) {
         return null;
     }
 
     @Override
-    public <S extends Planet> Optional<S> findOne(Example<S> example) {
+    public <S extends Planet> Optional<S> findOne(final Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends Planet> List<S> findAll(Example<S> example) {
+    public <S extends Planet> List<S> findAll(final Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends Planet> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Planet> List<S> findAll(final Example<S> example, final Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends Planet> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Planet> Page<S> findAll(final Example<S> example, final Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends Planet> long count(Example<S> example) {
+    public <S extends Planet> long count(final Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends Planet> boolean exists(Example<S> example) {
+    public <S extends Planet> boolean exists(final Example<S> example) {
         return false;
     }
 }

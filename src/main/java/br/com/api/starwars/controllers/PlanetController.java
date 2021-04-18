@@ -42,20 +42,20 @@ public class PlanetController {
     }
 
     @PostMapping(value = URI_PLANET)
-    public ResponseEntity<Planet> createPlanet(@RequestBody Planet planet, HttpServletResponse response) {
+    public ResponseEntity<Planet> createPlanet(@RequestBody final Planet planet, final HttpServletResponse response) {
 
         Planet planetSave = planetRepository.save(planet);
             return ResponseEntity.status(HttpStatus.CREATED).body(planetSave);
     }
 
     @GetMapping(value = URI_PLANET_CODE)
-    public ResponseEntity<Planet> getByCode(@PathVariable Long codigo) {
+    public ResponseEntity<Planet> getByCode(@PathVariable final Long codigo) {
         Planet planet = planetRepository.getOne(codigo);
             return planet != null ? ResponseEntity.ok(planet) : ResponseEntity.notFound().build();
     }
 
     @PutMapping(value = URI_PLANET)
-    public ResponseEntity<Planet> updatePlanet(@PathVariable Long codigo, @RequestBody Planet planet) {
+    public ResponseEntity<Planet> updatePlanet(@PathVariable final Long codigo, @RequestBody final Planet planet) {
 
         Planet planetSave = planetService.updatePlanet(codigo, planet);
             return ResponseEntity.ok(planetSave);
