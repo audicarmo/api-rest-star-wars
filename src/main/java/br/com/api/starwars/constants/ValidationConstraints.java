@@ -13,4 +13,7 @@ public class ValidationConstraints {
     public static final String NAME = "name";
     public static final String CLIMA = "clima";
     public static final String TERRENO = "terreno";
+
+    private ValidationConstraints() {
+    }
 }

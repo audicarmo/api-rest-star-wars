@@ -75,10 +75,6 @@
         <property name="fileExtensions" value="java"/>
     </module>
 
-    <!-- Checks for whitespace                               -->
-    <!-- See https://checkstyle.org/config_whitespace.html -->
-    <module name="FileTabCharacter"/>
-
     <!-- Miscellaneous other checks.                   -->
     <!-- See https://checkstyle.org/config_misc.html -->
     <module name="RegexpSingleline">
@@ -170,10 +166,6 @@
         <!-- See https://checkstyle.org/config_coding.html -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField">
-            <property name="ignoreSetter" value="true"/>
-            <property name="ignoreConstructorParameter" value="true"/>
-        </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MagicNumber"/>
@@ -187,10 +179,8 @@
         <module name="DesignForExtension">
             <property name="severity" value="ignore"/>
         </module>
-        <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
-        <module name="VisibilityModifier"/>
 
         <!-- Miscellaneous other checks.                   -->
         <!-- See https://checkstyle.org/config_misc.html -->

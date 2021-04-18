@@ -22,13 +22,13 @@ public class PlanetServiceImpl implements PlanetService {
     private final PlanetRepository planetRepository;
 
     @Transactional
-    public Planet createPlanet(Planet planet, HttpServletResponse response) {
+    public Planet createPlanet(final Planet planet, final HttpServletResponse response) {
 
         Planet planetSave = createPlanet(planet, response);
             return planetRepository.save(planetSave);
     }
 
-    public Planet updatePlanet (Long codigo, Planet planet) {
+    public Planet updatePlanet(final Long codigo, final Planet planet) {
 
         Planet planetSave = getByCode(codigo);
         BeanUtils.copyProperties(planet, planetSave, "codigo");
@@ -36,7 +36,7 @@ public class PlanetServiceImpl implements PlanetService {
             return planetRepository.save(planetSave);
     }
 
-    public Planet getByCode(Long codigo) {
+    public Planet getByCode(final Long codigo) {
         Planet planetSave = planetRepository.getOne(codigo);
         if (planetSave == null) {
             throw new EmptyResultDataAccessException(1);

@@ -6,11 +6,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(Planet.class)
-public class PlanetImpl {
+public class PlanetProcess {
 
     public static volatile SingularAttribute<Planet, Long> codigo;
     public static volatile SingularAttribute<Planet, String> name;
 
-    private PlanetImpl() {
+    private PlanetProcess() {
     }
 }

@@ -41,6 +41,7 @@ public class PlanetController {
         return planetRepository.findAll();
     }
 
+    @SuppressWarnings("checkstyle:HiddenField")
     @PostMapping(value = URI_PLANET)
     public ResponseEntity<Planet> createPlanet(@RequestBody final Planet planet, final HttpServletResponse response) {
 
