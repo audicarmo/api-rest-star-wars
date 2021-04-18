@@ -4,13 +4,39 @@ spring:
   sleuth:
     sampler:
       probability: 0.1
-  data:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
     mongodb:
       host: ${MONGODB_HOST:localhost}
       port: ${MONGODB_PORT:27017}
       database: ${MONGODB_DATABASE:STAR_WARS}
       username: ${MONGODB_USERNAME:STAR_WARS}
       password: ${MONGODB_PASSWORD:STAR_WARS}
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+          exclude: beans,env
+  logging:
+    level:
+      org:
+        hibernate:
+          type: trace
+  notify:
+    front-end:
+      base-url: http://localhost:4200
   main:
     allow-bean-definition-overriding: true
 management:
