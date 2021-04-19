@@ -81,3 +81,6 @@ To compile the project, run:
 mvn clean compile
 ```
 
+## Collections Postman
+
+https://github.com/audicarmo/star-wars-collections-postman
