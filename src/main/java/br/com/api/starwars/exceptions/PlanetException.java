@@ -3,7 +3,7 @@ package br.com.api.starwars.exceptions;
 import br.com.api.starwars.enums.ErrorMessages;
 import br.com.api.starwars.enums.ErrorCodeEnum;
 
-public class PlanetException extends Throwable {
+public class PlanetException extends BaseException {
 
     public PlanetException(
             final ErrorCodeEnum errorCodeEnum,
