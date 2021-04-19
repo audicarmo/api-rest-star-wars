@@ -5,6 +5,8 @@ public class ValidationConstraints {
     public static final String NAME_IS_REQUIRED = "Name is required";
     public static final String CLIMATE_IS_REQUIRED = "Climate is required";
     public static final String GROUND_IS_REQUIRED = "Ground is required";
+    public static final String DELETED_REQUIRED = "Deleted is required";
+
     public static final String BAD_REQUEST = "Validation failed";
     public static final String CODE_NOT_FOUND = "Code not found";
 

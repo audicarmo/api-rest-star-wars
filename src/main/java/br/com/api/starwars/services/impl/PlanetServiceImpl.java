@@ -12,10 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,37 +25,61 @@ public class PlanetServiceImpl implements PlanetService {
     @Autowired
     private final PlanetRepository planetRepository;
 
-    @Override
-    @Transactional
-    public Planet createPlanet(final Planet planet, final HttpServletResponse response) {
-
-        Planet planetSave = createPlanet(planet, response);
-            return planetRepository.save(planetSave);
-    }
-
     public List<Planet> getAllPlanets() {
         return planetRepository.findAll();
     }
 
     @Override
     @Transactional
+    public Planet create(final Planet planet, final HttpServletResponse response) {
+        Planet planetSave = create(planet, response);
+
+            return planetRepository.save(planetSave);
+    }
+
+    @Override
+    @Transactional
     public Planet getByCode(final String id) {
-        Optional<Planet> planetSave = planetRepository.findById(id);
-        if (planetSave == null) {
-            throw new PlanetException(
-                    ErrorCodeEnum.API_UNAVAILABLE,
-                    ErrorMessages.INTERNAL_SERVER_ERROR,
-                    ValidationConstraints.CODE_NOT_FOUND
-            );
-        }
-        return planetSave;
+        Planet planet = findByGetCodeOrElseThrow(id);
+        planet.validateIfDeleted();
+
+        return planet;
     }
-    
-    public List<Planet> getName(String name) {
-        return planetRepository.getPlanet(name);
+
+    @Override
+    @Transactional(readOnly = true)
+    public Planet getName(final String name) {
+        Planet planet = findByName(name);
+        planet.validateIfDeleted();
+
+        return planet;
     }
-    
-    public void deletePlanet(String id) {
-        planetRepository.delete(getByCode(id));
+
+    @Override
+    @Transactional
+    public void deletePlanet(final String id) {
+        Planet planet = findByGetCodeOrElseThrow(id);
+        planet.setDeleted(true);
+        planetRepository.save(planet);
+    }
+
+    private Planet findByGetCodeOrElseThrow(final String id) {
+        return planetRepository.findByCodeIgnoreCaseAndDeletedIsFalse(id)
+                .orElseThrow(() -> {
+                    return new PlanetException(ErrorCodeEnum.API_UNAVAILABLE,
+                            ErrorMessages.INTERNAL_SERVER_ERROR,
+                            ValidationConstraints.CODE_NOT_FOUND))
+                });
+    }
+
+    private Planet findByName(final String name) {
+        return planetRepository.findByNameCaseAndDeletedIsFalse(name)
+                .orElseThrow(() -> {
+                    return new PlanetException(
+                            ErrorCodeEnum.API_UNAVAILABLE,
+                            ErrorMessages.INTERNAL_SERVER_ERROR,
+                            StringUtils.replace(ValidationConstraints.NAME_IS_REQUIRED, "{}", name)
+                    );
+                });
     }
 }
