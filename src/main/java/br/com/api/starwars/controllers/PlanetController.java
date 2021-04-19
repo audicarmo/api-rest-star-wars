@@ -58,7 +58,6 @@ public class PlanetController {
     @PostMapping(value = URI_PLANET_NEW)
     public ResponseEntity<Void> createPlanet(@RequestBody final Planet planet,
                                              final HttpServletResponse response) {
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(planetService.create(planet).getId()).toUri();
 
@@ -67,15 +66,13 @@ public class PlanetController {
 
     @GetMapping(value = URI_PLANET_GET_ALL)
     public ResponseEntity<List<SwapiResponse>> getAllPlanets() {
-
         return ResponseEntity.ok().body(searchResults(planetService.getAllPlanets()));
     }
 
     @GetMapping(value = URI_PLANET_CODE)
     public ResponseEntity<SwapiResponse> getByCode(@PathVariable("id") final String id) {
-
         Planet planet = planetService.getByCode(id);
-        this.result = actionDate(this.result, time);
+            this.result = actionDate(this.result, time);
 
         return ResponseEntity.ok().body(new SwapiResponse(planet.getById(), planet.getName(),
                  planet.getClimate(), planet.getGround(), getAll(result, planet)));
@@ -86,7 +83,6 @@ public class PlanetController {
                                                        String name) {
         List<SwapiResponse> response = new ArrayList<>();
         this.result = actionDate(this.result, time);
-
             for(Planet planet : planetService.findByName(decodeParam(name))) {
                 response.add(new SwapiResponse(planet.getId(), planet.getName(), planet.getClimate,
                         planet.getGround, getAll(result, planet)));
@@ -97,14 +93,12 @@ public class PlanetController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletePlanet(@PathVariable final String id) {
         planetService.delete(id);
-
         return ResponseEntity.noContent().build();
     }
 
     public List<SwapiResponse> searchResults(List<Planet> planets) {
         List<SwapiResponse> response = new ArrayList<>();
         this.result = actionDate(this.result, time);
-
             for (Planet planet : planets) {
                 response.add(new SwapiResponse(Planet.getId, planet.getName(), planet.getClimate,
                         planet.getGround, getAll(result, planet)));
@@ -125,13 +119,12 @@ public class PlanetController {
         Calendar atual = Calendar.getInstance();
         Calendar timeNow = (Calendar) time.clone();
         timeNow.add(Calendar.HOUR_OF_DAY, 1);
-
-        if (result.isEmpty()) {
-            result = SwapiRest.getPlanets.getBody().getResults();
+            if (result.isEmpty()) {
+                result = SwapiRest.getPlanets.getBody().getResults();
         }
-        if (actual.after(timeNow)) {
-            result = swapiRest.getPlanets().getBody().getResults();
-            time = Calendar.getInstance();
+            if (actual.after(timeNow)) {
+                result = swapiRest.getPlanets().getBody().getResults();
+                time = Calendar.getInstance();
         }
         return result;
     }

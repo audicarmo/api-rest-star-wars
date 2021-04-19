@@ -25,6 +25,7 @@ public class PlanetServiceImpl implements PlanetService {
     @Autowired
     private final PlanetRepository planetRepository;
 
+    @Override
     @Transactional
     public Planet createPlanet(final Planet planet, final HttpServletResponse response) {
 
@@ -36,6 +37,8 @@ public class PlanetServiceImpl implements PlanetService {
         return planetRepository.findAll();
     }
 
+    @Override
+    @Transactional
     public Planet getByCode(final String id) {
         Optional<Planet> planetSave = planetRepository.findById(id);
         if (planetSave == null) {
