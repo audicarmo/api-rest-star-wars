@@ -23,7 +23,6 @@ public class PlanetQueriesImpl  implements PlanetQueries {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    @Override
     public Page<Planet> getPlanetsAll(final String name, final String climate, final Long ground,
                                       Pageable pageable) {
         Query query = new Query();
@@ -55,5 +54,10 @@ public class PlanetQueriesImpl  implements PlanetQueries {
         List<Planet> result = mongoTemplate.find(query, Planet.class);
 
         return new PageImpl<>(result, pageable, count);
+    }
+
+    @Override
+    public Page<Planet> getPlanetsAll(String name, String climate, String ground, Pageable pageable) {
+        return null;
     }
 }
