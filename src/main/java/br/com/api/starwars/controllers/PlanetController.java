@@ -31,6 +31,7 @@ import java.util.List;
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_CODE;
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_GET_ALL;
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_NEW;
+import static br.com.api.starwars.util.Utils.decodeParam;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -87,7 +88,7 @@ public class PlanetController {
         List<SwapiResponse> response = new ArrayList<>();
         this.result = actionDate(this.result, time);
 
-            for(Planet planet : planetService.findByName(URL.decodeParam(name))) {
+            for(Planet planet : planetService.findByName(decodeParam(name))) {
                 response.add(new SwapiResponse(planet.getId(), planet.getName(), planet.getClimate,
                         planet.getGround, getAll(result, planet)));
             }
