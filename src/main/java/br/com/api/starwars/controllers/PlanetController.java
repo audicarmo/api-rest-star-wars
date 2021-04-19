@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,12 +53,5 @@ public class PlanetController {
     public ResponseEntity<?> getByCode(@PathVariable final String codigo) {
         Optional<Planet> planet = planetRepository.findById(codigo);
             return planet != null ? ResponseEntity.ok(planet) : ResponseEntity.notFound().build();
-    }
-
-    @PutMapping(value = URI_PLANET)
-    public ResponseEntity<Planet> updatePlanet(@PathVariable final String codigo, @RequestBody final Planet planet) {
-
-        Planet planetSave = planetService.updatePlanet(codigo, planet);
-            return ResponseEntity.ok(planetSave);
     }
 }

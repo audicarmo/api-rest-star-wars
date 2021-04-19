@@ -10,6 +10,4 @@ public interface PlanetService {
     Planet createPlanet(Planet planet, HttpServletResponse response);
 
     Optional<Planet> getByCode(String codigo);
-
-    Planet updatePlanet(String codigo, Planet planet);
 }

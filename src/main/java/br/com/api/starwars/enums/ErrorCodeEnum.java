@@ -9,7 +9,7 @@ public enum ErrorCodeEnum {
 
     private String value;
 
-    ErrorCodeEnum(String value) {
+    ErrorCodeEnum(final String value) {
         this.value = value;
     }
 
@@ -19,7 +19,7 @@ public enum ErrorCodeEnum {
     }
 
     @JsonCreator
-    public static ErrorCodeEnum fromValue(String text) {
+    public static ErrorCodeEnum fromValue(final String text) {
         for (ErrorCodeEnum b : ErrorCodeEnum.values()) {
             if (String.valueOf(b.value).equals(text)) {
                 return b;

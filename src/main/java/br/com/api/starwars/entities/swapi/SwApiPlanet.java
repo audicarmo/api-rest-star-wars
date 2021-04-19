@@ -1,4 +1,4 @@
-package br.com.api.starwars.entities;
+package br.com.api.starwars.entities.swapi;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class SwApiPlanet {
 
     private List<String> play;
 
-    public SwApiPlanet(String name, List<String> play) {
+    public SwApiPlanet(final String name, final List<String> play) {
         this.name = name;
         this.play = play;
     }

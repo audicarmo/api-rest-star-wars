@@ -1,4 +1,4 @@
-package br.com.api.starwars.entities;
+package br.com.api.starwars.entities.swapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -13,7 +13,7 @@ public class SwApi {
 
     private List<SwApiPlanet> results;
 
-    public SwApi(List<SwApiPlanet> results, String name) {
+    public SwApi(final List<SwApiPlanet> results, final String name) {
         this.results = results;
     }
 }

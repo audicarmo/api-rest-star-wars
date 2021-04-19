@@ -1,11 +1,10 @@
 package br.com.api.starwars.configs;
 
 import br.com.api.starwars.constants.ValidationConstraints;
-import br.com.api.starwars.entities.SwApi;
+import br.com.api.starwars.entities.swapi.SwApi;
 import br.com.api.starwars.enums.ErrorCodeEnum;
 import br.com.api.starwars.enums.ErrorMessages;
 import br.com.api.starwars.exceptions.PlanetException;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,7 +21,16 @@ public class SwapiRest {
     RestTemplate restTemplate = new RestTemplate();
 
     public ResponseEntity<SwApi> getPlanets() {
-        return restTemplate.exchange(URL, HttpMethod.GET, response(), SwApi.class);
+        try {
+            return restTemplate.exchange(URL, HttpMethod.GET, response(), SwApi.class);
+        } catch (Exception e) {
+            throw new PlanetException(
+                    ErrorCodeEnum.API_UNAVAILABLE,
+                    ErrorMessages.INTERNAL_SERVER_ERROR,
+                    ValidationConstraints.BAD_REQUEST
+            );
+        }
+
     }
 
     public HttpEntity<String> response() {
