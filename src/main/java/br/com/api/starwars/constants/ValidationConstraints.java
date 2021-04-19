@@ -6,6 +6,7 @@ public class ValidationConstraints {
     public static final String CLIMATE_IS_REQUIRED = "Climate is required";
     public static final String GROUND_IS_REQUIRED = "Ground is required";
     public static final String BAD_REQUEST = "Validation failed";
+    public static final String CODE_NOT_FOUND = "Code not found";
 
     public static final int PLANET_NAME_MIN_SIZE = 2;
     public static final int PLANET_NAME_MAX_SIZE = 30;
