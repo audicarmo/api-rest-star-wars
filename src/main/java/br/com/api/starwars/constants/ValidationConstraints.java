@@ -5,6 +5,7 @@ public class ValidationConstraints {
     public static final String NAME_IS_REQUIRED = "Name is required";
     public static final String CLIMA_IS_REQUIRED = "Clima is required";
     public static final String TERRENO_IS_REQUIRED = "Terreno is required";
+    public static final String BAD_REQUEST = "Validation failed";
 
     public static final int PLANET_NAME_MIN_SIZE = 2;
     public static final int PLANET_NAME_MAX_SIZE = 30;
