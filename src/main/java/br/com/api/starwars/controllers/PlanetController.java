@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET;
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_CODE;
@@ -50,13 +51,13 @@ public class PlanetController {
     }
 
     @GetMapping(value = URI_PLANET_CODE)
-    public ResponseEntity<Planet> getByCode(@PathVariable final Long codigo) {
-        Planet planet = planetRepository.getOne(codigo);
+    public ResponseEntity<?> getByCode(@PathVariable final String codigo) {
+        Optional<Planet> planet = planetRepository.findById(codigo);
             return planet != null ? ResponseEntity.ok(planet) : ResponseEntity.notFound().build();
     }
 
     @PutMapping(value = URI_PLANET)
-    public ResponseEntity<Planet> updatePlanet(@PathVariable final Long codigo, @RequestBody final Planet planet) {
+    public ResponseEntity<Planet> updatePlanet(@PathVariable final String codigo, @RequestBody final Planet planet) {
 
         Planet planetSave = planetService.updatePlanet(codigo, planet);
             return ResponseEntity.ok(planetSave);

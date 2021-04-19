@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,16 +29,16 @@ public class PlanetServiceImpl implements PlanetService {
             return planetRepository.save(planetSave);
     }
 
-    public Planet updatePlanet(final Long codigo, final Planet planet) {
+    public Planet updatePlanet(final String codigo, final Planet planet) {
 
-        Planet planetSave = getByCode(codigo);
+        Optional<Planet> planetSave = Optional.ofNullable(getByCode(codigo));
         BeanUtils.copyProperties(planet, planetSave, "codigo");
 
             return planetRepository.save(planetSave);
     }
 
-    public Planet getByCode(final Long codigo) {
-        Planet planetSave = planetRepository.getOne(codigo);
+    public Optional<Planet> getByCode(final String codigo) {
+        Optional<Planet> planetSave = planetRepository.findById(codigo);
         if (planetSave == null) {
             throw new EmptyResultDataAccessException(1);
         }

@@ -18,30 +18,8 @@ spring:
       database: ${MONGODB_DATABASE:STAR_WARS}
       username: ${MONGODB_USERNAME:STAR_WARS}
       password: ${MONGODB_PASSWORD:STAR_WARS}
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
-          exclude: beans,env
-  logging:
-    level:
-      org:
-        hibernate:
-          type: trace
   notify:
     front-end:
       base-url: http://localhost:4200
   main:
     allow-bean-definition-overriding: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-        exclude: beans, env
