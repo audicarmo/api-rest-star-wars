@@ -18,13 +18,14 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
-public class PlanetQueriesImpl  implements PlanetQueries {
+public class PlanetQueriesImpl implements PlanetQueries {
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Override
     public Page<Planet> getPlanetsAll(final String name, final String climate, final Long ground,
-                                      Pageable pageable) {
+                                      final  Pageable pageable) {
         Query query = new Query();
 
         if (!StringUtils.isEmpty(name)) {
@@ -57,7 +58,8 @@ public class PlanetQueriesImpl  implements PlanetQueries {
     }
 
     @Override
-    public Page<Planet> getPlanetsAll(String name, String climate, String ground, Pageable pageable) {
+    public Page<Planet> getPlanetsAll(final String name, final String climate,
+                                      final String ground, final Pageable pageable) {
         return null;
     }
 }

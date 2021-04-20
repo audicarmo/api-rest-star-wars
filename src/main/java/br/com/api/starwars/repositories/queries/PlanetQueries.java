@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface PlanetQueries {
 
+    Page<Planet> getPlanetsAll(String name, String climate, Long ground,
+                               Pageable pageable);
+
     Page<Planet> getPlanetsAll(String name, String climate,
                                String ground, Pageable pageable);
 

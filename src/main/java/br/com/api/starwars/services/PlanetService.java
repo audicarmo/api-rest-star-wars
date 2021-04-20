@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface PlanetService {
 
-    Planet create(final Planet planet, HttpServletResponse response);
+    Planet create(Planet planet, HttpServletResponse response);
 
-    Planet getByCode(final String codigo);
+    Planet getByCode(String codigo);
 
-    Planet getName(final String name);
+    Planet getName(String name);
 
-    void deletePlanet(final String id);
+    void deletePlanet(String id);
 
     Planet getAllPlanets();
 
