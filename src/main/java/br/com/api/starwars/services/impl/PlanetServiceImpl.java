@@ -15,18 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PlanetServiceImpl implements PlanetService {
+public abstract class PlanetServiceImpl implements PlanetService {
 
     @Autowired
     private final PlanetRepository planetRepository;
 
-    public List<Planet> getAllPlanets() {
-        return planetRepository.findAll();
+    public Planet getAllPlanets() {
+        return (Planet) planetRepository.findAll();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class PlanetServiceImpl implements PlanetService {
                 .orElseThrow(() -> {
                     return new PlanetException(ErrorCodeEnum.API_UNAVAILABLE,
                             ErrorMessages.INTERNAL_SERVER_ERROR,
-                            ValidationConstraints.CODE_NOT_FOUND))
+                            ValidationConstraints.CODE_NOT_FOUND);
                 });
     }
 

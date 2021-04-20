@@ -13,23 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletResponse;
-
-import java.net.URI;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_CODE;
 import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_GET_ALL;
-import static br.com.api.starwars.constants.UrlConstants.URI_PLANET_NEW;
 import static br.com.api.starwars.util.Utils.decodeParam;
 
 @Slf4j
@@ -54,39 +47,27 @@ public class PlanetController {
 
     private List<SwApiPlanet> result = new ArrayList<>();
 
-    @Override
-    @PostMapping(value = URI_PLANET_NEW)
-    public ResponseEntity<Void> createPlanet(@RequestBody final Planet planet,
-                                             final HttpServletResponse response) {
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(planetService.create(planet).getId()).toUri();
-
-        return ResponseEntity.created(uri).build();
-    }
+    private Calendar actual = Calendar.getInstance();
 
     @GetMapping(value = URI_PLANET_GET_ALL)
     public ResponseEntity<List<SwapiResponse>> getAllPlanets() {
-        return ResponseEntity.ok().body(searchResults(planetService.getAllPlanets()));
+        return ResponseEntity.ok().body(searchResults(planet.getId()));
     }
 
     @GetMapping(value = URI_PLANET_CODE)
-    public ResponseEntity<SwapiResponse> getByCode(@PathVariable("id") final String id) {
+    public ResponseEntity<SwapiResponse> getByCode(@PathVariable("id") final String id, Calendar time)
+            throws IOException {
         Planet planet = planetService.getByCode(id);
             this.result = actionDate(this.result, time);
 
-        return ResponseEntity.ok().body(new SwapiResponse(planet.getById(), planet.getName(),
+        return ResponseEntity.ok().body(new SwapiResponse(planet.getId(), planet.getName(),
                  planet.getClimate(), planet.getGround(), getAll(result, planet)));
     }
 
     @GetMapping(value = "/urlName")
-    public ResponseEntity<List<SwapiResponse>> getName(@RequestParam(value = "name", defaultValue = ""),
-                                                       String name) {
+    public ResponseEntity<List<SwapiResponse>> getName(String name, Calendar time) throws IOException {
         List<SwapiResponse> response = new ArrayList<>();
         this.result = actionDate(this.result, time);
-            for(Planet planet : planetService.findByName(decodeParam(name))) {
-                response.add(new SwapiResponse(planet.getId(), planet.getName(), planet.getClimate,
-                        planet.getGround, getAll(result, planet)));
-            }
             return ResponseEntity.ok().body(response);
     }
 
@@ -96,12 +77,12 @@ public class PlanetController {
         return ResponseEntity.noContent().build();
     }
 
-    public List<SwapiResponse> searchResults(List<Planet> planets) {
+    public List<SwapiResponse> searchResults(List<Planet> planets, Calendar time) throws IOException {
         List<SwapiResponse> response = new ArrayList<>();
         this.result = actionDate(this.result, time);
             for (Planet planet : planets) {
-                response.add(new SwapiResponse(Planet.getId, planet.getName(), planet.getClimate,
-                        planet.getGround, getAll(result, planet)));
+                response.add(new SwapiResponse(planet.getId(), planet.getName(), planet.getClimate(),
+                        planet.getGround(), getAll(result, planet)));
             }
             return  response;
     }
@@ -115,13 +96,10 @@ public class PlanetController {
         return 0;
     }
 
-    private List<SwApiPlanet> actionDate(List<SwApiPlanet> result, Calendar time) {
+    private List<SwApiPlanet> actionDate(List<SwApiPlanet> result, Calendar time) throws IOException {
         Calendar atual = Calendar.getInstance();
         Calendar timeNow = (Calendar) time.clone();
         timeNow.add(Calendar.HOUR_OF_DAY, 1);
-            if (result.isEmpty()) {
-                result = SwapiRest.getPlanets.getBody().getResults();
-        }
             if (actual.after(timeNow)) {
                 result = swapiRest.getPlanets().getBody().getResults();
                 time = Calendar.getInstance();

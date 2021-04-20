@@ -12,4 +12,12 @@ public class SwApiPlanet {
         this.name = name;
         this.play = play;
     }
+
+    public List<String> getPlay() {
+        return play;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

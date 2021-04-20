@@ -13,4 +13,8 @@ public interface PlanetService {
     Planet getName(final String name);
 
     void deletePlanet(final String id);
+
+    Planet getAllPlanets();
+
+    void delete(String id);
 }
