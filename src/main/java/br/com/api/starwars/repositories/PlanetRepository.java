@@ -17,7 +17,7 @@ public interface PlanetRepository extends MongoRepository<Planet, String> {
             @Param("id") String id
     );
 
-    Optional<Planet> findByNameCaseAndDeletedIsFalse(
+    List<Planet> findByNameCaseAndDeletedIsFalse(
             @Param("name") String name
     );
 }

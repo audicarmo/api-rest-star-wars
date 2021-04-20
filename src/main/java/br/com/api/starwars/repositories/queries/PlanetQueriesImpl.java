@@ -40,7 +40,7 @@ public class PlanetQueriesImpl implements PlanetQueries {
 
         if (!StringUtils.isEmpty(ground)) {
             query.addCriteria(Criteria.where("ground")
-                                        .regex(ground, "i"));
+                                        .gte(ground));
         }
 
         if (pageable.getSort()
